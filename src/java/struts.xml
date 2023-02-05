@@ -50,6 +50,7 @@
             <result name="SUCCESS">employeeDetails.jsp</result>
             <result name="FAILURE">retrieveemployee.jsp</result>
         </action> 
+        <!--home page-->
         <action name="Home" class="com.exavalu.models.Employee" method="dogoToHome">
             <result name="SUCCESS">employeeDetails.jsp</result>
         </action> 
