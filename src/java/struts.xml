@@ -40,7 +40,7 @@
         </action> 
         <action name="DeleteEmployee" class="com.exavalu.models.Employee" method="doDelete">
             <result name="SUCCESS">employeeDetails.jsp</result>
-            <result name="FAILURE">searchemployee.jsp</result>
+            <result name="FAILURE">error.jsp</result>
         </action> 
         <action name="SignUp" class="com.exavalu.models.User" method="doSignUp">
             <result name="SUCCESS">login.jsp</result>
@@ -53,7 +53,13 @@
         <!--home page-->
         <action name="Home" class="com.exavalu.models.Employee" method="dogoToHome">
             <result name="SUCCESS">employeeDetails.jsp</result>
+            <result name="SUCCESS">error.jsp</result>
         </action> 
+        <action name="PreSignUp" class="com.exavalu.models.User" method="doPreSignUp">
+            <result name="SUCCESS">signup.jsp</result>
+            <result name="FAILURE">login.jsp</result>
+        </action>
+        
        
     </package>
 </struts>

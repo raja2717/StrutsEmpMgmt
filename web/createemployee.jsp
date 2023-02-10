@@ -1,5 +1,9 @@
 
 
+<%@page import="com.exavalu.models.State"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.exavalu.services.LocationService"%>
+<%@page import="java.util.ArrayList"%>
 <%--<%@page import="com.exavalu.empweb.entities.Role"%>
 <%@page import="com.exavalu.empweb.entities.Department"%>
 <%@page import="java.util.Iterator"%>
@@ -106,6 +110,7 @@
                                             </select>
                                             <label class="form-label" >Role Select</label>
                                         </div>
+
                                         <div class="form-outline mb-4">
                                             <input type="text" id="basicSalaryid" class="form-control form-control-lg" name="basicSalary"/>
                                             <label class="form-label" for="basicSalaryid">Basic Salary</label>
@@ -135,8 +140,21 @@
         <script>
             function changeCarAllowanceInput() {
                 var selectBox = document.getElementById("roleId");
-                var selectedValue = parseInt(selectBox.options[selectBox.selectedIndex].value);
+                var selectedValue = parseInt(selectBox.value);
                 document.getElementById('carAllowanceid').readOnly = selectedValue === 3 ? true : false;
+            }
+            function stateDropDown() {
+                var selectBox = document.getElementById("countrytagId");
+                var selectedValue = parseInt(selectBox.value);
+                document.getElementById('statetagId').disabled = selectedValue === 0 ? true : false;
+                document.getElementById('statetagId').value = selectedValue === 0 ? "0" : document.getElementById('statetagId').value;
+            }
+            function districtDropDown() {
+                var selectBox = document.getElementById("statetagId");
+                var selectedValue = parseInt(selectBox.value);
+
+                document.getElementById('districttagId').disabled = selectedValue === 0 ? true : false;
+                document.getElementById('districttagId').value = selectedValue === 0 ? "0" : document.getElementById('districttagId').value;
             }
         </script>
     </body>

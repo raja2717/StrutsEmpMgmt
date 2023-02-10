@@ -1,4 +1,4 @@
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html lang="en">
     <head>
@@ -18,30 +18,79 @@
         <link href="css/signin.css" rel="stylesheet">
 
     </head>
+    <script>
+        function submitForm(event) {
+            if (event.target.id === "countryCode") {
+                provinceCode.value = 0;
+            }
+
+            signUpForm.setAttribute("action", "PreSignUp");
+            signUpForm.submit();
+
+        }
+
+    </script>
 
     <body class="text-center">
 
 
         <main class="form-signin w-100 m-auto">
-            <form action="SignUp" method="post">
+            <form action="SignUp" id="signUpForm" method="post">
                 <img class="mb-4" src="images/flower-logo.jpg" alt="" width="200" height="200">
                 <h1 class="h3 mb-3 fw-normal">Please provide below information</h1>
 
                 <div class="form-floating">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="emailAddress">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="emailAddress" value="${User.emailAddress}">
                     <label for="floatingInput">Email address</label>
                 </div>
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" value="${User.password}">
                     <label for="floatingPassword">Password</label>
                 </div>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="firstName" placeholder="first name" name="firstName">
+                    <input type="text" class="form-control" id="firstName" placeholder="first name" name="firstName" value="${User.firstName}">
                     <label for="firstName">First Name</label>
                 </div>
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="lastName" placeholder="last name" name="lastName">
+                    <input type="text" class="form-control" id="lastName" placeholder="last name" name="lastName" value="${User.lastName}">
                     <label for="firstName">Last Name</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="address" placeholder="Address" name="address" value="${User.address}">
+                    <label for="address">Address</label>
+                </div>
+                <div class="form-floating">
+                    <select name="countryCode" class="form-control" id="countryCode" onchange="submitForm(event)">
+                        <option value="0">--select country--</option>
+
+                        <c:forEach items="${CountryList}" var="country">
+                            <option value="${country.countryCode}"<c:if test="${country.countryCode == User.countryCode}">selected</c:if>>
+                                ${country.countryName}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="form-floating">
+                    <select name="provinceCode" class="form-control" id="provinceCode" onchange="submitForm(event)">
+                        <option value="0">--select state--</option>
+
+                        <c:forEach items="${StateList}" var="province">
+                            <option value="${province.provinceCode}"<c:if test="${province.provinceCode == User.provinceCode}">selected</c:if>>
+                                ${province.provinceName}
+                            </option>
+                        </c:forEach>
+                    </select>
+                </div>
+                <div class="form-floating">
+                    <select name="distCode" class="form-control" id="distCode">
+                        <option value="0">--select district--</option>
+
+                        <c:forEach items="${DistList}" var="district">
+                            <option value="${district.distCode}"<c:if test="${district.distCode == User.distCode}">selected</c:if>>
+                                ${district.distName}
+                            </option>
+                        </c:forEach>
+                    </select>
                 </div>
 
 
@@ -57,8 +106,5 @@
                 <p class="mt-5 mb-3 text-muted">&copy; 2017?2022</p>
             </form>
         </main>
-
-
-
     </body>
 </html>
