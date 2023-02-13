@@ -59,6 +59,11 @@
             <result name="SUCCESS">signup.jsp</result>
             <result name="FAILURE">login.jsp</result>
         </action>
+        <!--consuming rest Api info and stroing it in db-->
+         <action name="FetchUrl" class="com.exavalu.models.Transcript" method="doFetchUrl">
+            <result name="SUCCESS">savinginfofromurl.jsp</result>
+            <result name="FAILURE">savinginfofromurl.jsp</result>
+        </action>
         
        
     </package>

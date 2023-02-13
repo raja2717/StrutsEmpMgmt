@@ -103,7 +103,7 @@
                 <a href="landingPage.jsp">
                     <button type="button" class="w-100 btn btn-lg btn-warning">Cancel</button>
                 </a>
-                <p class="mt-5 mb-3 text-muted">&copy; 2017?2022</p>
+                <p class="mt-5 mb-3 text-muted">&copy; 2019 r._a_j_a_ 2023</p>
             </form>
         </main>
     </body>

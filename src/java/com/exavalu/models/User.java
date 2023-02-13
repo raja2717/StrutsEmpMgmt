@@ -5,11 +5,14 @@ import com.exavalu.services.EmployeeService;
 import com.exavalu.services.LocationService;
 import com.exavalu.services.LoginService;
 import com.exavalu.services.RoleService;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Map;
+
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.ApplicationAware;
@@ -56,10 +59,8 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
         boolean success = LoginService.getInstance().doLogin(this);
 
         if (success) {
-             sessionMap.put("UpdateMsg", null);
+            sessionMap.put("UpdateMsg", null);
             ArrayList empList = new ArrayList();
-          
-            
             empList = EmployeeService.getInstance().getAllEmployees();
             ArrayList depList = DepartmentService.getAllDepartment();
             ArrayList roleList = RoleService.getAllRole();
@@ -67,7 +68,6 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
             sessionMap.put("RoleList", roleList);
             sessionMap.put("EmpListHome", empList);
             sessionMap.put("Loggedin", this);
-      
 
             System.out.println("returning Success from doLogin method");
             result = "SUCCESS";
@@ -100,34 +100,35 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
         }
         return result;
     }
-     public String doPreSignUp() {
-         String result = "SUCCESS";
-         ArrayList countryList = LocationService.getAllCountry();
-         ArrayList stateList = null;
-         ArrayList distList = null;
-         
-         System.out.println("countryList size="+countryList.size());
-         sessionMap.put("CountryList",countryList);
-         System.out.println("countryCode="+this.countryCode);
-         if(this.countryCode!=null)
-         {
-             stateList = LocationService.getAllState(this.countryCode);
-            
-             System.out.println("stateList size="+stateList.size());
-             sessionMap.put("StateList", stateList);
-             sessionMap.put("User",this);
-         }
-         if(this.countryCode!=null && this.provinceCode!=null)
-         {
+
+    public String doPreSignUp() {
+        String result = "SUCCESS";
+        ArrayList countryList = LocationService.getAllCountry();
+        ArrayList stateList = null;
+        ArrayList distList = null;
+
+        System.out.println("countryList size=" + countryList.size());
+        sessionMap.put("CountryList", countryList);
+        sessionMap.put("Loggedin", null);
+
+        System.out.println("countryCode=" + this.countryCode);
+        if (this.countryCode != null) {
+            stateList = LocationService.getAllState(this.countryCode);
+
+            System.out.println("stateList size=" + stateList.size());
+            sessionMap.put("StateList", stateList);
+            sessionMap.put("User", this);
+        }
+        if (this.countryCode != null && this.provinceCode != null) {
 //             stateList = LocationService.getAllState(this.countryCode);
-             distList = LocationService.getAllDistrict(this.provinceCode);
-             //System.out.println("stateList size="+stateList.size());
-             sessionMap.put("DistList", distList);
-             sessionMap.put("User",this);
-         }
-        
-         return result;
-     }
+            distList = LocationService.getAllDistrict(this.provinceCode);
+            //System.out.println("stateList size="+stateList.size());
+            sessionMap.put("DistList", distList);
+            sessionMap.put("User", this);
+        }
+
+        return result;
+    }
 
     private String emailAddress;
     private String password;

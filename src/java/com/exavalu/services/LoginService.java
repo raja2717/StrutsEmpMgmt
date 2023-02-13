@@ -41,7 +41,7 @@ public class LoginService {
             ps.setString(1, user.getEmailAddress());
             ps.setString(2, user.getPassword());
 
-            System.out.println("LoginService :: " + ps);
+            //System.out.println("LoginService :: " + ps);
 
             ResultSet rs = ps.executeQuery();
 

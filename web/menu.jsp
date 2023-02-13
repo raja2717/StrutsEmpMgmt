@@ -20,8 +20,9 @@
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="<c:if test="${Loggedin!=null}">Home</c:if>" class="nav-link px-2 text-white">Home</a></li>
+                    <li><a href="<c:if test="${Loggedin!=null}">FetchUrl</c:if>" class="nav-link px-2 text-white">Get-Info-From-RestAPI</a></li>
                     <li><a href="<c:if test="${Loggedin!=null}">CreateEmployee</c:if>" class="nav-link px-2 text-white text-decoration-underline">create employee</a></li>
-                        <li><a href="#" class="nav-link px-2 text-white text-decoration-underline">Select Location</a></li>
+
                         <li><a href="<c:if test="${Loggedin!=null}">SearchEmployee</c:if>" class="nav-link px-2 text-white text-decoration-underline">Search employee</a></li>
                     <li><a href="<c:if test="${Loggedin!=null}">retrieveemployee.jsp</c:if>" class="nav-link px-2 text-white text-decoration-underline">Retrieve-Deleted-Employee</a></li>
                         <c:if test="${Loggedin!=null}">
