@@ -5,6 +5,10 @@ import com.exavalu.utils.JDBCConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -37,7 +41,8 @@ public class JsonDataToDBService {
 //                result = true;
 //            }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(JsonDataToDBService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM))+" json data is not matching with the column of DB "+ex.getMessage());
         }
 
         return result;
@@ -65,8 +70,9 @@ public class JsonDataToDBService {
                 result = true;
             }
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        }catch (SQLException ex) {
+            Logger log = Logger.getLogger(JsonDataToDBService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM))+" json data is not matching with the column of DB "+ex.getMessage());
         }
 
         return result;

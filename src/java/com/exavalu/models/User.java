@@ -9,9 +9,13 @@ import com.exavalu.services.RoleService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 import java.util.ArrayList;
 import java.util.Map;
+import org.apache.log4j.Logger;
 
 import org.apache.struts2.dispatcher.ApplicationMap;
 import org.apache.struts2.dispatcher.SessionMap;
@@ -73,6 +77,8 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
             result = "SUCCESS";
 
         } else {
+//            Logger log = Logger.getLogger(LoginService.class.getName());
+//            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.SHORT))+"::either user id or password is incorrect");
             System.out.println("returning Failure from doLogin method");
         }
 
@@ -96,6 +102,7 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
             result = "SUCCESS";
 
         } else {
+            
             System.out.println("returning Failure from doLogin method");
         }
         return result;
@@ -113,19 +120,30 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
 
         System.out.println("countryCode=" + this.countryCode);
         if (this.countryCode != null) {
+            System.out.println("countrycode::"+this.countryCode);
             stateList = LocationService.getAllState(this.countryCode);
 
             System.out.println("stateList size=" + stateList.size());
             sessionMap.put("StateList", stateList);
             sessionMap.put("User", this);
+            result = "STATELIST";
         }
-        if (this.countryCode != null && this.provinceCode != null) {
-//             stateList = LocationService.getAllState(this.countryCode);
+         if (this.provinceCode != null) {
+            //System.out.println("countrycode::"+this.countryCode);
             distList = LocationService.getAllDistrict(this.provinceCode);
-            //System.out.println("stateList size="+stateList.size());
+
+           // System.out.println("stateList size=" + stateList.size());
             sessionMap.put("DistList", distList);
             sessionMap.put("User", this);
+            result = "DISTLIST";
         }
+//        if (this.countryCode != null && this.provinceCode != null) {
+////             stateList = LocationService.getAllState(this.countryCode);
+//            distList = LocationService.getAllDistrict(this.provinceCode);
+//            //System.out.println("stateList size="+stateList.size());
+//            sessionMap.put("DistList", distList);
+//            sessionMap.put("User", this);
+//        }
 
         return result;
     }

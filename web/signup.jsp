@@ -16,21 +16,30 @@
 
         <!-- Custom styles for this template -->
         <link href="css/signin.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.3.js" 
+                            integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="crossorigin="anonymous">
+
+        </script>
 
     </head>
     <script>
-        function submitForm(event) {
-            if (event.target.id === "countryCode") {
-                provinceCode.value = 0;
-            }
-
-            signUpForm.setAttribute("action", "PreSignUp");
-            signUpForm.submit();
-
-        }
-
+        function fetchContent(selectedId, targetId)
+                {
+            //            alert("'#"+selectedId.name+"'");
+                           
+                            $.ajax({
+                                    url: 'PreSignUp',
+                                    data: {
+                                            [selectedId]: $("#" + selectedId).val()
+                                    },
+                                    success: function (responseText) {
+                    //                        alert(responseText);
+                                            $("#" + targetId).html(responseText);
+                                    }
+                            });
+                           
+                }
     </script>
-
     <body class="text-center">
 
 
@@ -60,7 +69,7 @@
                     <label for="address">Address</label>
                 </div>
                 <div class="form-floating">
-                    <select name="countryCode" class="form-control" id="countryCode" onchange="submitForm(event)">
+                    <select name="countryCode" class="form-control" id="countryCode" onchange="fetchContent('countryCode', 'provinceCode')">
                         <option value="0">--select country--</option>
 
                         <c:forEach items="${CountryList}" var="country">
@@ -71,25 +80,18 @@
                     </select>
                 </div>
                 <div class="form-floating">
-                    <select name="provinceCode" class="form-control" id="provinceCode" onchange="submitForm(event)">
+                    <select name="provinceCode" class="form-control" id="provinceCode"  onchange="fetchContent('provinceCode', 'distCode')" >
                         <option value="0">--select state--</option>
 
-                        <c:forEach items="${StateList}" var="province">
-                            <option value="${province.provinceCode}"<c:if test="${province.provinceCode == User.provinceCode}">selected</c:if>>
-                                ${province.provinceName}
-                            </option>
-                        </c:forEach>
+                        </option>
+
                     </select>
                 </div>
                 <div class="form-floating">
                     <select name="distCode" class="form-control" id="distCode">
                         <option value="0">--select district--</option>
 
-                        <c:forEach items="${DistList}" var="district">
-                            <option value="${district.distCode}"<c:if test="${district.distCode == User.distCode}">selected</c:if>>
-                                ${district.distName}
-                            </option>
-                        </c:forEach>
+                        </option>
                     </select>
                 </div>
 

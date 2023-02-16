@@ -10,6 +10,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -42,9 +46,7 @@ public class LoginService {
             ps.setString(2, user.getPassword());
 
             //System.out.println("LoginService :: " + ps);
-
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
                 user.setFirstName(rs.getString("firstName"));
                 user.setLastName(rs.getString("lastName"));
@@ -52,7 +54,14 @@ public class LoginService {
             }
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(LoginService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM))+" "+ex.getMessage());
+            
+            //log.error("connection is not setup to database");
+            // log.info(ex.getMessage());
+            //log.error(ex.getMessage());
+            // return success;
+            //ex.printStackTrace();
         }
 
         return success;
@@ -81,7 +90,9 @@ public class LoginService {
             return true;
 
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            Logger log = Logger.getLogger(LoginService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.MEDIUM))+" ::duplicate entry::"+ex.getMessage());
+            //ex.printStackTrace();
         }
 
         return false;

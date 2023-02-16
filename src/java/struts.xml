@@ -56,6 +56,8 @@
             <result name="SUCCESS">error.jsp</result>
         </action> 
         <action name="PreSignUp" class="com.exavalu.models.User" method="doPreSignUp">
+            <result name="STATELIST">statelist.jsp</result>
+            <result name="DISTLIST">distlist.jsp</result>
             <result name="SUCCESS">signup.jsp</result>
             <result name="FAILURE">login.jsp</result>
         </action>
@@ -63,6 +65,7 @@
          <action name="FetchUrl" class="com.exavalu.models.Transcript" method="doFetchUrl">
             <result name="SUCCESS">savinginfofromurl.jsp</result>
             <result name="FAILURE">savinginfofromurl.jsp</result>
+            
         </action>
         
        
