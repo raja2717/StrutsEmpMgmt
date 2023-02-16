@@ -77,8 +77,8 @@ public class User extends ActionSupport implements ApplicationAware, SessionAwar
             result = "SUCCESS";
 
         } else {
-//            Logger log = Logger.getLogger(LoginService.class.getName());
-//            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.SHORT))+"::either user id or password is incorrect");
+            Logger log = Logger.getLogger(LoginService.class.getName());
+            log.error(LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.FULL, FormatStyle.SHORT))+"::either user id or password is incorrect");
             System.out.println("returning Failure from doLogin method");
         }
 
